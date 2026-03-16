@@ -14,6 +14,7 @@ use TomatoPHP\FilamentMediaManager\Resources\Actions\CreateMediaAction;
 use TomatoPHP\FilamentMediaManager\Resources\Actions\CreateSubFolderAction;
 use TomatoPHP\FilamentMediaManager\Resources\Actions\DeleteFolderAction;
 use TomatoPHP\FilamentMediaManager\Resources\Actions\EditCurrentFolderAction;
+use TomatoPHP\FilamentMediaManager\Resources\Actions\RegenerateConversionAction;
 use TomatoPHP\FilamentMediaManager\Resources\MediaResource;
 
 class ListMedia extends ManageRecords
@@ -69,6 +70,8 @@ class ListMedia extends ManageRecords
                     CreateSubFolderAction::make($folder_id),
                     DeleteFolderAction::make($folder_id),
                     EditCurrentFolderAction::make($folder_id),
+                    RegenerateConversionAction::make($folder_id),
+
                 ];
             } else {
                 return [];
@@ -79,6 +82,8 @@ class ListMedia extends ManageRecords
                 CreateSubFolderAction::make($folder_id),
                 DeleteFolderAction::make($folder_id),
                 EditCurrentFolderAction::make($folder_id),
+                RegenerateConversionAction::make($folder_id),
+              
             ];
         }
     }

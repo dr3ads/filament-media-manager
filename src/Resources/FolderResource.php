@@ -204,7 +204,8 @@ class FolderResource extends Resource
             ])
             ->recordActions([
                 Actions\EditAction::make(),
-                Actions\DeleteAction::make(),
+                Actions\DeleteAction::make()
+                 
             ])
             ->toolbarActions([
                 Actions\BulkActionGroup::make([

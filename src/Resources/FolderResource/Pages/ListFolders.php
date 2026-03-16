@@ -4,6 +4,7 @@ namespace TomatoPHP\FilamentMediaManager\Resources\FolderResource\Pages;
 
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
+use Illuminate\Support\Facades\Storage;
 use TomatoPHP\FilamentMediaManager\Resources\FolderResource;
 
 class ListFolders extends ManageRecords
@@ -12,8 +13,19 @@ class ListFolders extends ManageRecords
 
     protected function getHeaderActions(): array
     {
+
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->using(function (array $data){
+                    $model = config('filament-media-manager.model.folder');
+
+                    $folder =  new $model($data);
+
+                    Storage::disk('s3')->makeDirectory($folder->name);
+
+                    $folder->save();
+                    return $folder;
+                })
         ];
     }
 

@@ -32,7 +32,10 @@ class CreateMediaAction
                     ->columnSpanFull(),
             ])
             ->action(function (array $data) use ($folder_id) {
-                $folder = Folder::find($folder_id);
+                $model = config('filament-media-manager.model.folder');
+
+                $folder = $model::find($folder_id);
+
                 if ($folder) {
                     if ($folder->model) {
                         $folder->model->addMedia($data['file'])
@@ -47,6 +50,7 @@ class CreateMediaAction
                                 'title' => $data['title'],
                                 'description' => $data['description'],
                             ])
+                            ->preservingOriginal()
                             ->toMediaCollection($folder->collection);
                     }
 

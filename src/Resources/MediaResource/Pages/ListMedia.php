@@ -7,6 +7,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ManageRecords;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Facades\Artisan;
 use TomatoPHP\FilamentMediaManager\Models\Folder;
 use TomatoPHP\FilamentMediaManager\Models\Media;
 use TomatoPHP\FilamentMediaManager\Resources\Actions\CreateMediaAction;
@@ -198,6 +199,20 @@ class ListMedia extends ManageRecords
                 $media->delete();
             })
             ->successNotificationTitle(trans('filament-media-manager::messages.media.notifications.delete-folder'));
+
+    }
+
+    public function renegerateConversions(): Actions\Action
+    {
+        return Actions\Action::make('renegerateConversions')
+            ->label("Renegate Conversions")
+            ->icon('heroicon-s-arrow-path-rounded-square')
+            ->color('primary')
+            ->requiresConfirmation()
+            ->action(function (array $arguments) {
+                Artisan::call('media-library:regenerate --ids='. $arguments['record']['id']);
+            })
+            ->successNotificationTitle("Renegate Conversions");
 
     }
 }

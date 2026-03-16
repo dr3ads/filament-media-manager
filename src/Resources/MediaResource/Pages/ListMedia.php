@@ -210,7 +210,7 @@ class ListMedia extends ManageRecords
             ->color('primary')
             ->requiresConfirmation()
             ->action(function (array $arguments) {
-                Artisan::call('media-library:regenerate --ids='. $arguments['record']['id']);
+                Artisan::call('media-library:regenerate --force --ids='. $arguments['record']['id'] );
             })
             ->successNotificationTitle("Renegate Conversions");
 
